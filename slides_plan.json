@@ -1,0 +1,52 @@
+﻿[
+  {
+    "layout_key": "Title Slide",
+    "fields": {
+      "title": "Веб‑презентатор",
+      "subtitle": "JSON + Теми + Медіа",
+      "footer": "демо",
+      "notes": "Коротка ремарка для доповідача"
+    }
+  },
+  {
+    "layout_key": "Title and Content",
+    "fields": {
+      "title": "Можливості",
+      "body": [
+        "Шаблони (CRUD)",
+        "Теми (CRUD)",
+        "Офлайн + USB-клікери",
+        "Медіа: зображення/відео/HTML"
+      ],
+      "footer": "демо"
+    }
+  },
+  {
+    "layout_key": "Image Only",
+    "fields": {
+      "title": "Дрон",
+      "images": [
+        { "src": "drone.svg", "alt": "БпЛА", "fit": "contain", "w": "70%" }
+      ]
+    }
+  },
+  {
+    "layout_key": "Video Slide",
+    "fields": {
+      "title": "Демо відео",
+      "videos": [ { "src": "video1.mp4", "controls": true, "autoplay": false, "muted": false } ],
+      "footer": "відео"
+    }
+  },
+  {
+    "layout_key": "Markmap Export",
+    "fields": {
+      "title": "Markmap (експорт HTML)",
+      "src": "markmap2.html",
+      "h": "100%",
+      "fullbleed": true,
+      "pannable": false,
+      "center": true
+    }
+  }
+]

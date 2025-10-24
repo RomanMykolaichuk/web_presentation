@@ -1,0 +1,32 @@
+[
+  {
+    "id": "dark-blue",
+    "name": "Dark Blue",
+    "vars": {"--bg":"#0e0f13","--fg":"#e9edf1","--accent":"#4da3ff","--muted":"#9aa4af","--card":"#141824","--line":"#2a2f3a","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  },
+  {
+    "id": "light",
+    "name": "Light",
+    "vars": {"--bg":"#ffffff","--fg":"#121212","--accent":"#005fcc","--muted":"#5b6570","--card":"#f4f6f8","--line":"#d9dee5","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  },
+  {
+    "id": "olive",
+    "name": "Олива",
+    "vars": {"--bg":"#0f120e","--fg":"#ecf0e6","--accent":"#7aa400","--muted":"#9aa690","--card":"#171b14","--line":"#2a2f22","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  },
+  {
+    "id": "sea-wave",
+    "name": "Морська хвиля",
+    "vars": {"--bg":"#0b1013","--fg":"#e7fbff","--accent":"#16b1c4","--muted":"#81a8ad","--card":"#0f171b","--line":"#1e2d33","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  },
+  {
+    "id": "olive-light",
+    "name": "Олива (світла)",
+    "vars": {"--bg":"#f6f8f2","--fg":"#1a1d16","--accent":"#7aa400","--muted":"#66705f","--card":"#ffffff","--line":"#d9dfcc","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  },
+  {
+    "id": "sea-wave-light",
+    "name": "Морська хвиля (світла)",
+    "vars": {"--bg":"#f5fbfd","--fg":"#0d2b33","--accent":"#0aa3b8","--muted":"#557b82","--card":"#ffffff","--line":"#d3e8ed","fontFamily":"system-ui, Segoe UI, Roboto, Arial, sans-serif"}
+  }
+]

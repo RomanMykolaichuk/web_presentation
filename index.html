@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Веб‑презентатор (SPA)</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <!-- Верхня панель керування -->
+  <header class="topbar">
+    <div class="left">
+      <button id="btn-open-json" title="Відкрити slides_plan.json">Відкрити JSON</button>
+      <input id="input-json" type="file" accept="application/json" hidden>
+
+      <button id="btn-open-assets" title="Вибрати папку assets">Вибрати папку assets</button>
+      <input id="input-assets" type="file" webkitdirectory directory multiple hidden>
+
+      <button id="btn-overview" title="Огляд (O)">Огляд</button>
+      <button id="btn-help" title="Довідка (?)">Довідка</button>
+      <button id="btn-fullscreen" title="Повний екран (F)">Повний екран</button>
+    </div>
+    <div class="center">
+      <span id="counter">0 / 0</span>
+    </div>
+    <div class="right">
+      <button id="btn-templates" title="Шаблони">Шаблони</button>
+      <button id="btn-themes" title="Теми">Теми</button>
+      <label class="toggle"><input id="toggle-notes" type="checkbox"> Нотатки (N)</label>
+      <label class="toggle"><input id="toggle-trusted" type="checkbox"> Довірений HTML</label>
+    </div>
+  </header>
+
+  <!-- Зона для drag&drop файлів JSON -->
+  <div id="drop-hint">Перетягніть сюди slides_plan.json або папку assets</div>
+
+  <!-- Область слайдів -->
+  <main id="stage" class="stage" tabindex="0" aria-label="Слайди">
+    <div id="slides-container" class="slides"></div>
+  </main>
+
+  <!-- Прогрес-бар -->
+  <div class="progress"><div id="progress-bar"></div></div>
+
+  <!-- Нотатки доповідача -->
+  <aside id="notes" class="notes" aria-live="polite"></aside>
+
+  <!-- Огляд (grid) -->
+  <section id="overview" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-content grid" id="overview-grid"></div>
+    <button class="overlay-close" id="close-overview">Закрити</button>
+  </section>
+
+  <!-- Довідка -->
+  <section id="help" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-content help">
+      <h2>Гарячі клавіші</h2>
+      <ul>
+        <li>→ / Space / PageDown / Enter — наступний</li>
+        <li>← / PageUp / Backspace — попередній</li>
+        <li>Home / End — перший / останній</li>
+        <li>F — повний екран</li>
+        <li>B або . — blackout</li>
+        <li>T — таймер у футері; R — скинути</li>
+        <li>O — огляд (grid)</li>
+        <li>? — довідка</li>
+        <li>N — нотатки</li>
+      </ul>
+    </div>
+    <button class="overlay-close" id="close-help">Закрити</button>
+  </section>
+
+  <!-- Blackout -->
+  <div id="blackout" class="blackout hidden" aria-hidden="true"></div>
+
+  <!-- Модал: Шаблони -->
+  <section id="templates-modal" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-content modal">
+      <div class="modal-header">
+        <h2>Шаблони</h2>
+        <div class="spacer"></div>
+        <button id="tpl-import">Імпорт</button>
+        <button id="tpl-export">Експорт</button>
+        <button id="tpl-new">Новий</button>
+      </div>
+      <div class="modal-body split">
+        <div class="pane">
+          <ul id="tpl-list" class="list"></ul>
+        </div>
+        <div class="pane">
+          <form id="tpl-form" class="form">
+            <label>ID <input name="id"></label>
+            <label>Назва <input name="name"></label>
+            <label>layout_key <input name="layout_key"></label>
+            <label>fieldsSchema (JSON)
+              <textarea name="fieldsSchema" rows="8" spellcheck="false"></textarea>
+            </label>
+            <div class="row">
+              <button type="submit">Зберегти</button>
+              <button type="button" id="tpl-delete">Видалити</button>
+              <button type="button" id="tpl-preview">Прев’ю</button>
+            </div>
+          </form>
+          <div id="tpl-preview-area" class="preview"></div>
+        </div>
+      </div>
+    </div>
+    <button class="overlay-close" id="close-templates">Закрити</button>
+  </section>
+
+  <!-- Модал: Теми -->
+  <section id="themes-modal" class="overlay hidden" aria-hidden="true">
+    <div class="overlay-content modal">
+      <div class="modal-header">
+        <h2>Теми</h2>
+        <div class="spacer"></div>
+        <button id="th-import">Імпорт</button>
+        <button id="th-export">Експорт</button>
+        <button id="th-new">Нова</button>
+      </div>
+      <div class="modal-body split">
+        <div class="pane">
+          <ul id="th-list" class="list"></ul>
+        </div>
+        <div class="pane">
+          <form id="th-form" class="form">
+            <label>ID <input name="id"></label>
+            <label>Назва <input name="name"></label>
+            <label>Змінні теми (JSON)
+              <textarea name="vars" rows="10" spellcheck="false"></textarea>
+            </label>
+            <div class="row">
+              <button type="submit">Зберегти</button>
+              <button type="button" id="th-delete">Видалити</button>
+              <button type="button" id="th-apply">Застосувати</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <button class="overlay-close" id="close-themes">Закрити</button>
+  </section>
+
+  <!-- Приховані інпут-файли для імпорту шаблонів/тем -->
+  <input id="tpl-file" type="file" accept="application/json" hidden>
+  <input id="th-file" type="file" accept="application/json" hidden>
+
+  <script src="app.js"></script>
+</body>
+</html>
+

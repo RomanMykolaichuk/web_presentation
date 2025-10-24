@@ -1,0 +1,51 @@
+[
+  {
+    "id": "tpl-title",
+    "name": "Title Slide",
+    "layout_key": "Title Slide",
+    "fieldsSchema": { "title": "string", "subtitle": "string?", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-content",
+    "name": "Title and Content",
+    "layout_key": "Title and Content",
+    "fieldsSchema": { "title": "string", "body": "string|string[]", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-image",
+    "name": "Image Only",
+    "layout_key": "Image Only",
+    "fieldsSchema": { "title": "string?", "images": "[Image]" }
+  }
+  ,
+  {
+    "id": "tpl-video",
+    "name": "Video Slide",
+    "layout_key": "Video Slide",
+    "fieldsSchema": { "title": "string?", "videos": "[Video] (src, controls, autoplay, loop, muted)", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-markmap-svg",
+    "name": "Markmap (SVG)",
+    "layout_key": "Image Only",
+    "fieldsSchema": { "title": "string?", "images": "[Image] (src, alt, fit, w, h)" }
+  },
+  {
+    "id": "tpl-markmap-html",
+    "name": "Markmap (HTML)",
+    "layout_key": "IFrame",
+    "fieldsSchema": { "title": "string?", "src": "string", "w": "string?", "h": "string?" }
+  },
+  {
+    "id": "tpl-markmap-export",
+    "name": "Markmap Export (HTML)",
+    "layout_key": "Markmap Export",
+    "fieldsSchema": { "title": "string?", "src": "string", "center": "boolean?", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-mindmap-native",
+    "name": "Mindmap (Native)",
+    "layout_key": "Mindmap",
+    "fieldsSchema": { "title": "string?", "mm_tree": "{text, children[]}?", "src": "string? (JSON tree)", "footer": "string?", "notes": "string?" }
+  }
+]
