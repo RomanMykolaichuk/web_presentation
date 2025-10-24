@@ -1,0 +1,87 @@
+[
+  {
+    "id": "tpl-title",
+    "name": "Title Slide",
+    "layout_key": "Title Slide",
+    "fieldsSchema": { "title": "string", "subtitle": "string?", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-content",
+    "name": "Title and Content",
+    "layout_key": "Title and Content",
+    "fieldsSchema": { "title": "string", "body": "string|string[]", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-image",
+    "name": "Image Only",
+    "layout_key": "Image Only",
+    "fieldsSchema": { "title": "string?", "images": "[Image]" }
+  }
+  ,
+  {
+    "id": "tpl-video",
+    "name": "Video Slide",
+    "layout_key": "Video Slide",
+    "fieldsSchema": { "title": "string?", "videos": "[Video] (src, controls, autoplay, loop, muted)", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-markmap-export",
+    "name": "Markmap Export (HTML)",
+    "layout_key": "Markmap Export",
+    "fieldsSchema": { "title": "string?", "src": "string", "center": "boolean?", "footer": "string?", "notes": "string?" }
+  },
+  {
+    "id": "tpl-agenda",
+    "name": "Agenda / Outline",
+    "layout_key": "Agenda / Outline Slide",
+    "fieldsSchema": { "title": "string", "items": "string[]", "footer": "string?" }
+  },
+  {
+    "id": "tpl-text-image",
+    "name": "Text + Image",
+    "layout_key": "Text + Image Slide",
+    "fieldsSchema": { "title": "string", "body": "string[]", "image": "{src, alt?, pos? (left|right)}", "footer": "string?" }
+  },
+  {
+    "id": "tpl-comparison",
+    "name": "Comparison",
+    "layout_key": "Comparison Slide",
+    "fieldsSchema": { "title": "string", "a_title": "string?", "a": "string[]", "b_title": "string?", "b": "string[]", "c_title": "string?", "c": "string[]?" }
+  },
+  {
+    "id": "tpl-chart",
+    "name": "Chart / Graph",
+    "layout_key": "Chart / Graph Slide",
+    "fieldsSchema": { "title": "string", "chartImage": "{src, alt?}", "caption": "string?" }
+  },
+  {
+    "id": "tpl-process",
+    "name": "Process / Flow",
+    "layout_key": "Process / Flow Slide",
+    "fieldsSchema": { "title": "string", "steps": "string[]" }
+  },
+  {
+    "id": "tpl-problem-solution",
+    "name": "Problem–Solution",
+    "layout_key": "Problem–Solution Slide",
+    "fieldsSchema": { "title": "string", "problem": "string[]", "solution": "string[]" }
+  },
+  {
+    "id": "tpl-quote",
+    "name": "Quote / Key Message",
+    "layout_key": "Quote / Key Message Slide",
+    "fieldsSchema": { "title": "string?", "quote": "string", "author": "string?", "photo": "{src, alt?}?" }
+  },
+  {
+    "id": "tpl-team",
+    "name": "Team / Organizational",
+    "layout_key": "Team / Organizational Slide",
+    "fieldsSchema": { "title": "string", "members": "[{name, role, photo?}]" }
+  },
+  {
+    "id": "tpl-summary",
+    "name": "Summary / Thank You",
+    "layout_key": "Summary / Thank You Slide",
+    "fieldsSchema": { "title": "string", "points": "string[]?", "contacts": "string?", "qr": "{src}?", "thanks": "string?" }
+  }
+]

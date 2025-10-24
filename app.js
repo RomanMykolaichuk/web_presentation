@@ -224,7 +224,7 @@ async function loadThemesFromDBOrFile() {
   let dbThemes = await idbAll("themes");
   let fileThemes = null;
   try {
-    const r = await fetch("themes.json");
+  const r = await fetch("data/themes.json");
     if (r.ok) fileThemes = await r.json();
   } catch {}
   if (!dbThemes.length) {
@@ -251,7 +251,7 @@ async function loadTemplatesFromDBOrFile() {
   let dbTpl = await idbAll("templates");
   let fileTpl = null;
   try {
-    const r = await fetch("templates.json");
+  const r = await fetch("data/templates.json");
     if (r.ok) fileTpl = await r.json();
   } catch {}
   if (!dbTpl.length) {
@@ -270,7 +270,7 @@ async function loadTemplatesFromDBOrFile() {
 // ---- Слайди: завантаження ----
 async function autoLoadSlides() {
   try {
-    const r = await fetch("slides_plan.json", { cache: "no-store" });
+  const r = await fetch("data/slides_plan.json", { cache: "no-store" });
     if (!r.ok) throw new Error("not ok");
     const json = await r.json();
     setSlides(json);
@@ -312,6 +312,34 @@ function renderSlideElement(slide) {
   const footerLeft = f.footer ? `<div class="left">${escapeHTML(f.footer)}</div>` : `<div class="left"></div>`;
   const footerRight = `<div class="right"><span class="timer" data-timer></span></div>`;
   const footer = `<div class="footer">${footerLeft}${footerRight}</div>`;
+
+  // Modular renderers: if registered, delegate rendering and return early
+  try {
+    const reg = window.SlideRenderers || {};
+    const k = (slide.layout_key || "").trim();
+    const fn = reg[k] || reg.__default__;
+    if (typeof fn === 'function') {
+      const helpers = { escapeHTML, getAssetUrl, asArray, state };
+      const shared = { titleHTML: title, subtitleHTML: subtitle };
+      const result = fn(slide, helpers, shared);
+      const bodyHTML = (typeof result === 'string') ? result : (result?.html || "");
+      const classes = (typeof result === 'object' && Array.isArray(result.classes)) ? result.classes : [];
+      classes.forEach(c => { if (c) wrap.classList.add(c); });
+      wrap.innerHTML = `${bodyHTML}${footer}`;
+      return wrap;
+    }
+  } catch (_) {}
+
+  // Render via registry (modular path only)
+  const helpers = { escapeHTML, getAssetUrl, asArray, state };
+  const shared = { titleHTML: title, subtitleHTML: subtitle };
+  { const reg = window.SlideRenderers || {}; const key = (slide.layout_key || '').trim(); const fn = typeof reg[key] === 'function' ? reg[key] : reg.__default__;
+    const result = typeof fn === 'function' ? fn(slide, helpers, shared) : { html: '' };
+    const bodyHTML = (typeof result === 'string') ? result : (result?.html || '');
+    const classes = (typeof result === 'object' && Array.isArray(result.classes)) ? result.classes : [];
+    classes.forEach(c => { if (c) wrap.classList.add(c); });
+    wrap.innerHTML = `${bodyHTML}${footer}`;
+    return wrap; }
 
   let bodyHTML = "";
   switch ((slide.layout_key || "").trim()) {

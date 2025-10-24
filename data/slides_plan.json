@@ -1,0 +1,131 @@
+[
+  {
+    "layout_key": "Title Slide",
+    "fields": {
+      "title": "Демонстрація презентації",
+      "subtitle": "Шаблони + Рендерери + JSON",
+      "footer": "web_presentation",
+      "notes": "Клавіші: ←/→ для навігації"
+    }
+  },
+  {
+    "layout_key": "Title and Content",
+    "fields": {
+      "title": "Мета",
+      "body": [
+        "Структура презентації у JSON",
+        "Рендер через модулі",
+        "Гнучкі шаблони",
+        "Асети з папки assets/"
+      ],
+      "footer": "intro"
+    }
+  },
+  {
+    "layout_key": "Image Only",
+    "fields": {
+      "title": "Ілюстрація",
+      "images": [
+        { "src": "drone.svg", "alt": "Дрон", "fit": "contain", "w": "70%" }
+      ]
+    }
+  },
+  {
+    "layout_key": "Video Slide",
+    "fields": {
+      "title": "Коротке відео",
+      "videos": [ { "src": "video1.mp4", "controls": true, "autoplay": false, "muted": false } ],
+      "footer": "media"
+    }
+  },
+  {
+    "layout_key": "Markmap Export",
+    "fields": {
+      "title": "Markmap (експорт HTML)",
+      "src": "markmap2.html",
+      "h": "100%",
+      "fullbleed": true,
+      "pannable": false,
+      "center": true
+    }
+  },
+  {
+    "layout_key": "Agenda / Outline Slide",
+    "fields": {
+      "title": "План",
+      "items": ["Вступ", "Інфраструктура", "Дизайн", "Демо", "Висновки"]
+    }
+  },
+  {
+    "layout_key": "Text + Image Slide",
+    "fields": {
+      "title": "Ідея + Ілюстрація",
+      "body": ["Коротко про ідею", "Підтримка зображень", "Баланс 50/50"],
+      "image": { "src": "example.png", "alt": "Схема", "pos": "right" }
+    }
+  },
+  {
+    "layout_key": "Comparison Slide",
+    "fields": {
+      "title": "Порівняння варіантів",
+      "a_title": "Варіант A",
+      "a": ["Простий", "Швидкий старт"],
+      "b_title": "Варіант B",
+      "b": ["Гнучкий", "Масштабований"],
+      "c_title": "Варіант C",
+      "c": ["Експериментальний"]
+    }
+  },
+  {
+    "layout_key": "Chart / Graph Slide",
+    "fields": {
+      "title": "Дані та тренди",
+      "chartImage": { "src": "chart.png", "alt": "Графік" },
+      "caption": "Показник за кварталами"
+    }
+  },
+  {
+    "layout_key": "Process / Flow Slide",
+    "fields": {
+      "title": "Процес публікації",
+      "steps": ["Підготовка", "Створення", "Перевірка", "Публікація", "Зворотній зв'язок"]
+    }
+  },
+  {
+    "layout_key": "Problem–Solution Slide",
+    "fields": {
+      "title": "Проблема → Рішення",
+      "problem": ["Дані розрізнені", "Складно оновлювати"],
+      "solution": ["Єдиний JSON формат", "Модульні рендерери"]
+    }
+  },
+  {
+    "layout_key": "Quote / Key Message Slide",
+    "fields": {
+      "title": "Ключова думка",
+      "quote": "Простота — це вища форма вишуканості.",
+      "author": "Леонардо да Вінчі"
+    }
+  },
+  {
+    "layout_key": "Team / Organizational Slide",
+    "fields": {
+      "title": "Команда",
+      "members": [
+        { "name": "Олена", "role": "Дизайн", "photo": "avatar1.png" },
+        { "name": "Іван", "role": "Розробка", "photo": "avatar2.png" },
+        { "name": "Марія", "role": "Аналітика", "photo": "avatar3.png" }
+      ]
+    }
+  },
+  {
+    "layout_key": "Summary / Thank You Slide",
+    "fields": {
+      "title": "Підсумки",
+      "points": ["Модульні шаблони", "Гнучкі дані", "Просте редагування"],
+      "contacts": "email@example.com",
+      "qr": { "src": "qr.png" },
+      "thanks": "Дякуємо за увагу!"
+    }
+  }
+]
