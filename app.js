@@ -26,6 +26,37 @@ const state = {
   activeThemeId: null,
 };
 
+// Persistence helpers: keep deck and current index across reloads
+function saveDeckToStorage() {
+  try {
+    localStorage.setItem("savedSlides", JSON.stringify(state.slides || []));
+    localStorage.setItem("savedIndex", String(Math.max(0, state.current | 0)));
+  } catch (_) {}
+}
+function saveIndexToStorage() {
+  try {
+    localStorage.setItem("savedIndex", String(Math.max(0, state.current | 0)));
+  } catch (_) {}
+}
+function loadDeckFromStorage() {
+  try {
+    const raw = localStorage.getItem("savedSlides");
+    if (!raw) return null;
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr) || !arr.length) return null;
+    const idx = Math.max(
+      0,
+      Math.min(
+        parseInt(localStorage.getItem("savedIndex") || "0", 10) || 0,
+        arr.length - 1
+      )
+    );
+    return { slides: arr, index: idx };
+  } catch (_) {
+    return null;
+  }
+}
+
 // Р вЂ™Р В±РЎС“Р Т‘Р С•Р Р†Р В°Р Р…РЎвЂ“ Р Т‘Р ВµР СР С•-Р Т‘Р В°Р Р…РЎвЂ“ (РЎР‚Р ВµР В·Р ВµРЎР‚Р Р†Р Р…Р С•, РЎРЏР С”РЎвЂ°Р С• Р Р…Р Вµ Р Р†Р Т‘Р В°РЎРѓРЎвЂљРЎРЉРЎРѓРЎРЏ Р В·РЎвЂЎР С‘РЎвЂљР В°РЎвЂљР С‘ РЎвЂћР В°Р в„–Р В»Р С‘ Р С—Р С•РЎР‚РЎРЏР Т‘)
 const DEMO_SLIDES = [
   {
@@ -318,6 +349,13 @@ async function loadTemplatesFromDBOrFile() {
 // ---- Р РЋР В»Р В°Р в„–Р Т‘Р С‘: Р В·Р В°Р Р†Р В°Р Р…РЎвЂљР В°Р В¶Р ВµР Р…Р Р…РЎРЏ ----
 async function autoLoadSlides() {
   try {
+    const restored = loadDeckFromStorage();
+    if (restored) {
+      state.slides = restored.slides;
+      state.current = restored.index;
+      renderSlides();
+      return;
+    }
     const r = await fetch("data/slides_plan.json", { cache: "no-store" });
     if (!r.ok) throw new Error("not ok");
     const json = await r.json();
@@ -335,6 +373,7 @@ function setSlides(slides) {
     state.slides.length - 1
   );
   renderSlides();
+  saveDeckToStorage();
 }
 
 // ---- Р В Р вЂўР СњР вЂќР вЂўР В  Р РЋР вЂєР С’Р в„ўР вЂќР вЂ Р вЂ™ ----
@@ -630,6 +669,7 @@ function goTo(i) {
   if (i === state.current) return;
   state.current = i;
   updateUI();
+  saveIndexToStorage();
 }
 
 // URL hash (#3) РІвЂ вЂ™ РЎвЂ“Р Р…Р Т‘Р ВµР С”РЎРѓ 0-based
@@ -766,6 +806,8 @@ async function handleSlidesFile(file) {
     const text = await file.text();
     const json = JSON.parse(text);
     setSlides(json);
+    firstSlide();
+    saveDeckToStorage();
   } catch (e) {
     alert(
       "Р СњР Вµ Р Р†Р Т‘Р В°Р В»Р С•РЎРѓРЎРЏ Р С—РЎР‚Р С•РЎвЂЎР С‘РЎвЂљР В°РЎвЂљР С‘ JSON: " +
