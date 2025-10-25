@@ -8,3 +8,4 @@
     return { html: `${titleHTML}<div class="content two-col">${prob}${sol}</div>` };
   });
 })();
+

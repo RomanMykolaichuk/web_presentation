@@ -6,7 +6,7 @@
   --card: #141824;
   --line: #2a2f3a;
   --font: system-ui, Segoe UI, Roboto, Arial, sans-serif;
-  --side-decor-width: 280px;
+  --side-strip-w: 260px;
 }
 
 * {
@@ -122,23 +122,12 @@ input[type="checkbox"] {
 .slide .title-hero .title-center { position: relative; z-index: 2; text-align: center; padding: 24px; }
 .slide .title-hero .title-logo-big { display: block; height: 200px; width: auto; margin: 0 auto 16px; }
 .slide.title-hero-present .logo-mark { display: none !important; }
-
-/* Right-side decorative image ("боковик"): full height, double width */
-.slide .side-decor {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: var(--side-decor-width, 280px);
-  height: 100%;
-  object-fit: cover;
-  opacity: .28;
-  pointer-events: none;
-  z-index: 4; /* keep above slide background */
-}
+/* Optional explicit side strip per slide */
+.slide .side-strip { position:absolute; top:0; bottom:0; right:0; width: var(--side-strip-w); height:100%; object-fit: cover; opacity:.28; pointer-events:none; z-index:4; }
+.slide.has-side-strip { padding-right: calc(40px + var(--side-strip-w)); }
+/* Side decorative image removed */
 /* Avoid text overlapping the side image */
-.slide.has-side-decor { padding-right: calc(40px + var(--side-decor-width, 280px)); }
-.slide.has-side-decor .footer { right: calc(40px + var(--side-decor-width, 280px)); }
+/* Side-decor classes removed */
 
 /* Avoid text overlapping with corner logo on non-title slides */
 .slide.has-logo:not(.title-hero-present):not(.fullbleed) { padding-left: calc(40px + 72px + 16px); }
@@ -269,7 +258,7 @@ input[type="checkbox"] {
   will-change: transform;
 }
 
-/* Mindmap (нативний, без iframe) */
+/* Mindmap (РЅР°С‚РёРІРЅРёР№, Р±РµР· iframe) */
 .mindmap {
   width: 100%;
   height: 100%;
@@ -448,7 +437,7 @@ input[type="checkbox"] {
   display: none !important;
 }
 
-/* Друк у PDF: кожен слайд на окремій сторінці */
+/* Р”СЂСѓРє Сѓ PDF: РєРѕР¶РµРЅ СЃР»Р°Р№Рґ РЅР° РѕРєСЂРµРјС–Р№ СЃС‚РѕСЂС–РЅС†С– */
 @media print {
   body {
     background: #fff;

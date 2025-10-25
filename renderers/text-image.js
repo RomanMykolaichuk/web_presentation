@@ -1,4 +1,4 @@
-(function(){
+﻿(function(){
   registerSlideRenderer("Text + Image Slide", function(slide, { escapeHTML, getAssetUrl }, { titleHTML }){
     const f = slide.fields || {};
     const items = Array.isArray(f.body) ? f.body : (f.body ? [f.body] : []);
@@ -13,3 +13,4 @@
     return { html: `${titleHTML}<div class="content two-col">${content}</div>` };
   });
 })();
+

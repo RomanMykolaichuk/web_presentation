@@ -9,3 +9,4 @@
     return { html: `${titleHTML}<div class="content summary">${ul}${contacts}${qr}<div class="thanks">${thanks}</div></div>` };
   });
 })();
+

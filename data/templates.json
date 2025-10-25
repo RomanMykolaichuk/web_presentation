@@ -1,100 +1,167 @@
-[
+﻿[
   {
     "id": "tpl-title",
     "name": "Title Slide",
     "description": "Титульний слайд першого екрана: назва презентації, за потреби підзаголовок/ПІБ/дата. Мінімум тексту, акцент на заголовку.",
     "layout_key": "Title Slide",
-    "fieldsSchema": { "title": "string", "subtitle": "string?", "footer": "string?", "notes": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "subtitle": "string?",
+      "footer": "string?",
+      "notes": "string?"
+    }
   },
   {
     "id": "tpl-content",
     "name": "Title and Content",
     "description": "Заголовок і текстовий блок: абзац або маркований список основних тез (3–6 пунктів).",
     "layout_key": "Title and Content",
-    "fieldsSchema": { "title": "string", "body": "string|string[]", "footer": "string?", "notes": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "body": "string|string[]",
+      "footer": "string?",
+      "notes": "string?",
+      "side": "{src}"
+    }
   },
   {
     "id": "tpl-image",
     "name": "Image Only",
     "description": "Слайд лише із зображенням(ами): фото/схема/ілюстрація. Може містити заголовок. Підтримує кілька зображень і режими fit.",
     "layout_key": "Image Only",
-    "fieldsSchema": { "title": "string?", "images": "[Image]" }
+    "fieldsSchema": {
+      "title": "string?",
+      "images": "[Image]"
+    }
   },
   {
     "id": "tpl-video",
     "name": "Video Slide",
     "description": "Слайд з одним або кількома відео. Параметри відтворення: controls, autoplay, loop, muted.",
     "layout_key": "Video Slide",
-    "fieldsSchema": { "title": "string?", "videos": "[Video] (src, controls, autoplay, loop, muted)", "footer": "string?", "notes": "string?" }
+    "fieldsSchema": {
+      "title": "string?",
+      "videos": "[Video] (src, controls, autoplay, loop, muted)",
+      "footer": "string?",
+      "notes": "string?"
+    }
   },
   {
     "id": "tpl-markmap-export",
     "name": "Markmap Export (HTML)",
     "description": "Вбудований експорт Markmap як HTML (iframe). Показ mindmap зі сторінки export; додатково можна центрувати вміст.",
     "layout_key": "Markmap Export",
-    "fieldsSchema": { "title": "string?", "src": "string", "center": "boolean?", "footer": "string?", "notes": "string?" }
+    "fieldsSchema": {
+      "title": "string?",
+      "src": "string",
+      "center": "boolean?",
+      "footer": "string?",
+      "notes": "string?"
+    }
   },
   {
     "id": "tpl-agenda",
     "name": "Agenda / Outline",
     "description": "План/структура виступу: короткий список розділів або етапів (3–6 пунктів).",
     "layout_key": "Agenda / Outline Slide",
-    "fieldsSchema": { "title": "string", "items": "string[]", "footer": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "items": "string[]",
+      "footer": "string?"
+    }
   },
   {
     "id": "tpl-text-image",
     "name": "Text + Image",
     "description": "Текст + зображення збоку (ліворуч/праворуч). 3–5 маркованих пунктів та ілюстрація для візуальної підтримки.",
     "layout_key": "Text + Image Slide",
-    "fieldsSchema": { "title": "string", "body": "string[]", "image": "{src, alt?, pos? (left|right)}", "footer": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "body": "string[]",
+      "image": "{src, alt?, pos? (left|right)}",
+      "footer": "string?"
+    }
   },
   {
     "id": "tpl-comparison",
     "name": "Comparison",
     "description": "Порівняння 2–3 варіантів у колонках: короткі заголовки та списки переваг/властивостей.",
     "layout_key": "Comparison Slide",
-    "fieldsSchema": { "title": "string", "a_title": "string?", "a": "string[]", "b_title": "string?", "b": "string[]", "c_title": "string?", "c": "string[]?" }
+    "fieldsSchema": {
+      "title": "string",
+      "a_title": "string?",
+      "a": "string[]",
+      "b_title": "string?",
+      "b": "string[]",
+      "c_title": "string?",
+      "c": "string[]?"
+    }
   },
   {
     "id": "tpl-chart",
     "name": "Chart / Graph",
     "description": "Діаграма або графік як зображення. За потреби підпис (caption) для пояснення ключового показника.",
     "layout_key": "Chart / Graph Slide",
-    "fieldsSchema": { "title": "string", "chartImage": "{src, alt?}", "caption": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "chartImage": "{src, alt?}",
+      "caption": "string?"
+    }
   },
   {
     "id": "tpl-process",
     "name": "Process / Flow",
     "description": "Етапи процесу по горизонталі зі стрілками між кроками. Кожен крок — короткий підпис.",
     "layout_key": "Process / Flow Slide",
-    "fieldsSchema": { "title": "string", "steps": "string[]" }
+    "fieldsSchema": {
+      "title": "string",
+      "steps": "string[]"
+    }
   },
   {
     "id": "tpl-problem-solution",
     "name": "Problem–Solution",
     "description": "Дві колонки: зліва проблема(и), справа рішення. Стислі формулювання, фокус на контрасті.",
     "layout_key": "Problem–Solution Slide",
-    "fieldsSchema": { "title": "string", "problem": "string[]", "solution": "string[]" }
+    "fieldsSchema": {
+      "title": "string",
+      "problem": "string[]",
+      "solution": "string[]"
+    }
   },
   {
     "id": "tpl-quote",
     "name": "Quote / Key Message",
     "description": "Цитата або ключове повідомлення великим шрифтом. За бажанням автор і фото.",
     "layout_key": "Quote / Key Message Slide",
-    "fieldsSchema": { "title": "string?", "quote": "string", "author": "string?", "photo": "{src, alt?}?" }
+    "fieldsSchema": {
+      "title": "string?",
+      "quote": "string",
+      "author": "string?",
+      "photo": "{src, alt?}?"
+    }
   },
   {
     "id": "tpl-team",
     "name": "Team / Organizational",
     "description": "Команда або оргструктура: картки учасників із фото, іменем і роллю. Можна перелік підрозділів.",
     "layout_key": "Team / Organizational Slide",
-    "fieldsSchema": { "title": "string", "members": "[{name, role, photo?}]" }
+    "fieldsSchema": {
+      "title": "string",
+      "members": "[{name, role, photo?}]"
+    }
   },
   {
     "id": "tpl-summary",
     "name": "Summary / Thank You",
     "description": "Підсумковий слайд: 3–4 висновки, контакти/QR і повідомлення подяки.",
     "layout_key": "Summary / Thank You Slide",
-    "fieldsSchema": { "title": "string", "points": "string[]?", "contacts": "string?", "qr": "{src}?", "thanks": "string?" }
+    "fieldsSchema": {
+      "title": "string",
+      "points": "string[]?",
+      "contacts": "string?",
+      "qr": "{src}?",
+      "thanks": "string?"
+    }
   }
 ]

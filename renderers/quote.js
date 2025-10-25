@@ -7,3 +7,4 @@
     return { html: `${titleHTML}<div class="content quote"><blockquote>${quote}${author}</blockquote>${photo}</div>` };
   });
 })();
+
