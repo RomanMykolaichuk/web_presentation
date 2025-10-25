@@ -10,7 +10,10 @@ const state = {
     trustedHTML: false,
     notesVisible: false,
     timerVisible: false,
+    slideNumbersVisible: false,
   },
+  logoUrl: null,
+  
   timer: {
     startAt: 0,
     elapsed: 0,
@@ -158,6 +161,21 @@ function downloadJSON(filename, data) {
   a.href = url; a.download = filename; a.click();
   setTimeout(() => URL.revokeObjectURL(url), 500);
 }
+
+// Discover optional logo at logo/logo.png and cache URL
+function discoverLogo() {
+  try {
+    const url = 'logo/logo.png';
+    const img = new Image();
+    img.onload = () => { state.logoUrl = url; try { renderSlides(); } catch(_){} };
+    img.onerror = () => {};
+    img.decoding = 'async';
+    img.src = url;
+  } catch(_) {}
+}
+
+// Discover optional title background at logo/title.png
+// title/background and side decorations removed
 
 function fmtTime(sec) {
   const m = Math.floor(sec / 60).toString().padStart(2, "0");
@@ -326,6 +344,19 @@ function renderSlideElement(slide) {
       const classes = (typeof result === 'object' && Array.isArray(result.classes)) ? result.classes : [];
       classes.forEach(c => { if (c) wrap.classList.add(c); });
       wrap.innerHTML = `${bodyHTML}${footer}`;
+  // Inject logo mark if configured
+  if (state.logoUrl) {
+    try { wrap.classList.add('has-logo'); } catch(_){ }
+    const mark = document.createElement('img');
+    mark.className = 'logo-mark';
+    mark.src = state.logoUrl;
+    mark.alt = '';
+    mark.setAttribute('draggable','false');
+    wrap.insertBefore(mark, wrap.firstChild);
+  }
+  // Optional right side decorative strip
+  // side decorations removed
+
       return wrap;
     }
   } catch (_) {}
@@ -447,7 +478,22 @@ function renderSlideElement(slide) {
 
 function updateUI() {
   const slides = $$(".slide");
-  slides.forEach((el, i) => el.classList.toggle("active", i === state.current));
+  slides.forEach((el, i) => {
+    el.classList.toggle("active", i === state.current);
+    let badge = el.querySelector('.slide-number');
+    const total = slides.length;
+    if (state.settings.slideNumbersVisible) {
+      if (!badge) {
+        badge = document.createElement('div');
+        badge.className = 'slide-number';
+        el.appendChild(badge);
+      }
+      badge.textContent = `${i + 1} / ${total}`;
+      badge.style.display = '';
+    } else if (badge) {
+      badge.style.display = 'none';
+    }
+  });
   const total = slides.length;
   const counter = $("#counter");
   counter.textContent = `${total ? state.current + 1 : 0} / ${total}`;
@@ -791,15 +837,37 @@ function setupUI() {
   $("#close-help").addEventListener("click", () => closeOverlay("help"));
   $("#btn-fullscreen").addEventListener("click", toggleFullscreen);
 
+  // Hide UI in fullscreen: toggle a class on body
+  const onFsChange = () => {
+    document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+  };
+  document.addEventListener('fullscreenchange', onFsChange);
+  // Safari/WebKit compatibility
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+
   // Нотатки, довірений HTML
   const toggleNotes = $("#toggle-notes");
   const toggleTrusted = $("#toggle-trusted");
+  let toggleNumbers = $("#toggle-slide-numbers");
+  if (!toggleNumbers) {
+    const right = document.querySelector('.topbar .right');
+    if (right) {
+      const lbl = document.createElement('label');
+      lbl.className = 'toggle';
+      lbl.innerHTML = '<input id="toggle-slide-numbers" type="checkbox"> № слайдів';
+      right.appendChild(lbl);
+      toggleNumbers = lbl.querySelector('input');
+    }
+  }
   state.settings.notesVisible = localStorage.getItem("notesVisible") === "1";
   state.settings.trustedHTML = localStorage.getItem("trustedHTML") === "1";
+  state.settings.slideNumbersVisible = localStorage.getItem("slideNumbersVisible") === "1";
   toggleNotes.checked = state.settings.notesVisible;
   toggleTrusted.checked = state.settings.trustedHTML;
+  if (toggleNumbers) toggleNumbers.checked = state.settings.slideNumbersVisible;
   toggleNotes.addEventListener("change", () => { state.settings.notesVisible = toggleNotes.checked; localStorage.setItem("notesVisible", toggleNotes.checked ? "1" : "0"); updateUI(); });
   toggleTrusted.addEventListener("change", () => { state.settings.trustedHTML = toggleTrusted.checked; localStorage.setItem("trustedHTML", toggleTrusted.checked ? "1" : "0"); renderSlides(); });
+  if (toggleNumbers) toggleNumbers.addEventListener("change", () => { state.settings.slideNumbersVisible = toggleNumbers.checked; localStorage.setItem("slideNumbersVisible", toggleNumbers.checked ? "1" : "0"); updateUI(); });
 
   // Templates modal
   $("#btn-templates").addEventListener("click", () => openOverlay("templates-modal"));
@@ -851,6 +919,7 @@ async function main() {
   state.db = await openDB();
   await Promise.all([loadTemplatesFromDBOrFile(), loadThemesFromDBOrFile()]);
   await autoLoadSlides();
+  discoverLogo();
   // ініціалізувати панорамування після рендера
   initPannable();
 }
