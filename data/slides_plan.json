@@ -81,7 +81,8 @@
     "fields": {
       "title": "Дані та тренди",
       "chartImage": { "src": "chart.png", "alt": "Графік" },
-      "caption": "Показник за кварталами"
+      "caption": "Показник за кварталами",
+      "h": "450px"
     }
   },
   {
@@ -112,9 +113,9 @@
     "fields": {
       "title": "Команда",
       "members": [
-        { "name": "Олена", "role": "Дизайн", "photo": "avatar1.png" },
+        { "name": "Олена", "role": "Дизайн", "photo": "avatar1.jpg" },
         { "name": "Іван", "role": "Розробка", "photo": "avatar2.png" },
-        { "name": "Марія", "role": "Аналітика", "photo": "avatar3.png" }
+        { "name": "Марія", "role": "Аналітика", "photo": "avatar3.jpg" }
       ]
     }
   },
@@ -124,7 +125,7 @@
       "title": "Підсумки",
       "points": ["Модульні шаблони", "Гнучкі дані", "Просте редагування"],
       "contacts": "email@example.com",
-      "qr": { "src": "qr.png" },
+      "qr": { "src": "qr_ai_edu.png" },
       "thanks": "Дякуємо за увагу!"
     }
   }

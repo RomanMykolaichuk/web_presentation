@@ -26,7 +26,7 @@
     "fields": {
       "title": "Дрон",
       "images": [
-        { "src": "drone.svg", "alt": "БпЛА", "fit": "contain", "w": "70%" }
+        { "src": "drone.svg", "alt": "БпЛА", "fit": "contain", "w": "60%" }
       ]
     }
   },

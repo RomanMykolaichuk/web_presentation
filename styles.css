@@ -6,6 +6,7 @@
   --card: #141824;
   --line: #2a2f3a;
   --font: system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  --side-decor-width: 280px;
 }
 
 * {
@@ -122,8 +123,22 @@ input[type="checkbox"] {
 .slide .title-hero .title-logo-big { display: block; height: 200px; width: auto; margin: 0 auto 16px; }
 .slide.title-hero-present .logo-mark { display: none !important; }
 
-/* Optional right-side decorative image for text slides */
-.slide .side-decor { position: absolute; top: 8px; bottom: 8px; right: 8px; width: 140px; height: auto; opacity: .22; pointer-events: none; z-index: 1; }
+/* Right-side decorative image ("боковик"): full height, double width */
+.slide .side-decor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: var(--side-decor-width, 280px);
+  height: 100%;
+  object-fit: cover;
+  opacity: .28;
+  pointer-events: none;
+  z-index: 4; /* keep above slide background */
+}
+/* Avoid text overlapping the side image */
+.slide.has-side-decor { padding-right: calc(40px + var(--side-decor-width, 280px)); }
+.slide.has-side-decor .footer { right: calc(40px + var(--side-decor-width, 280px)); }
 
 /* Avoid text overlapping with corner logo on non-title slides */
 .slide.has-logo:not(.title-hero-present):not(.fullbleed) { padding-left: calc(40px + 72px + 16px); }
@@ -141,7 +156,7 @@ input[type="checkbox"] {
 }
 .slide .content p,
 .slide .content li {
-  font-size: clamp(16px, 2vw, 24px);
+  font-size: clamp(18px, 2.4vw, 28px);
   line-height: 1.35;
 }
 .slide .footer {
@@ -158,7 +173,7 @@ input[type="checkbox"] {
   position: absolute;
   top: 12px;
   right: 16px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1;
   color: var(--muted);
   background: rgba(0, 0, 0, 0.35);
@@ -185,7 +200,11 @@ input[type="checkbox"] {
   object-fit: cover;
 }
 /* Layout helpers for balanced slide usage */
-.content.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
+.content.two-col { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 24px; align-items: stretch; }
+.content.two-col > * { min-width: 0; min-height: 0; }
+.content.two-col .ti-image { display: flex; align-items: center; justify-content: center; height: 100%; }
+.content.two-col .ti-image img { max-width: 100%; max-height: 100%; width: 100%; height: auto; object-fit: contain; display: block; }
+.content.two-col .ti-text { align-self: center; }
 @media (max-width: 900px){ .content.two-col { grid-template-columns: 1fr; } }
 .cmp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
 .cmp-col h3 { margin: 0 0 8px; font-size: clamp(18px, 2.4vw, 28px); }
@@ -196,7 +215,10 @@ input[type="checkbox"] {
 .agenda { max-width: 80%; margin: 0 auto; }
 .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; align-items: start; }
 .team-grid .member { text-align: center; }
-.team-grid .member img { width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); background: #0d1018; }
+.team-grid .member .photo { width: 100%; aspect-ratio: 4 / 3; border-radius: 10px; border: 1px solid var(--line); background: #0d1018; overflow: hidden; }
+.team-grid .member .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.team-grid .member .name { margin-top: 8px; font-weight: 600; font-size: calc(1em + 2px); }
+.team-grid .member .role { color: var(--muted); font-size: calc(1em + 2px); }
 .quote { max-width: 80%; margin: 0 auto; font-size: clamp(18px, 2.4vw, 28px); }
 .chart.placeholder, figure.chart { display: grid; place-items: center; height: 100%; }
 
@@ -350,7 +372,7 @@ input[type="checkbox"] {
 }
 .grid .thumb h4 {
   margin: 8px 10px 10px;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--fg);
   white-space: nowrap;
   overflow: hidden;
@@ -359,7 +381,7 @@ input[type="checkbox"] {
 .grid .thumb p {
   margin: 0 10px 12px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
