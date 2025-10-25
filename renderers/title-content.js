@@ -1,4 +1,4 @@
-(function(){
+﻿(function(){
   registerSlideRenderer("Title and Content", function(slide, helpers, shared){
     const f = slide.fields || {};
     const body = f.body;
@@ -10,6 +10,9 @@
     } else {
       inner = `<p></p>`;
     }
-    return { html: `${shared.titleHTML}<div class="content">${inner}</div>` };
+    const side = f.side && f.side.src ? `<img class="side-strip" src="${helpers.getAssetUrl(f.side.src)}" alt="">` : '';
+    const classes = f.side && f.side.src ? ["has-side-strip"] : [];
+    return { html: `${shared.titleHTML}<div class="content">${inner}</div>${side}`, classes };
   });
 })();
+
