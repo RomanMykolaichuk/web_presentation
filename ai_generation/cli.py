@@ -21,6 +21,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--lang", type=str, default="uk", help="Language hint (uk/en/...) for generation")
     p.add_argument("--max-slides", type=int, default=8, help="Max slides to generate (hint)")
     p.add_argument("--offline", action="store_true", help="Force stub (no network)")
+    p.add_argument("--max-calls", type=int, default=3, help="Max Gemini calls (0..3): 3=plan+draft+review, 2=plan+draft, 1=draft only, 0=offline")
     p.add_argument("--verbose", action="store_true", help="Verbose agent logs")
     return p.parse_args()
 
@@ -67,6 +68,9 @@ def main() -> int:
             model_name=settings.model,
             ctx=ctx,
             verbose=args.verbose,
+            max_calls=max(0, min(3, args.max_calls)),
+            groq_api_key=None if args.offline else settings.groq_api_key,
+            groq_model=settings.groq_model,
         )
     except Exception as e:
         sys.stderr.write(f"[warn] agent failed ({e}); writing stub deck\n")
@@ -78,9 +82,13 @@ def main() -> int:
             model_name=settings.model,
             ctx=ctx,
             verbose=args.verbose,
+            max_calls=0,
+            groq_api_key=None,
+            groq_model=settings.groq_model,
         )
 
-    out_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_payload = data["slides"] if isinstance(data, dict) and "slides" in data else data
+    out_path.write_text(json.dumps(out_payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Saved: {out_path}")
     return 0
 
