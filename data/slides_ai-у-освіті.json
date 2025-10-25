@@ -1,0 +1,82 @@
+{
+  "slides": [
+    {
+      "layout_key": "Title Slide",
+      "fields": {
+        "title": "AI у освіті",
+        "subtitle": "Автоматично згенерована презентація"
+      }
+    },
+    {
+      "layout_key": "Agenda / Outline Slide",
+      "fields": {
+        "title": "План",
+        "items": [
+          "Мета",
+          "Підхід",
+          "Етапи"
+        ]
+      }
+    },
+    {
+      "layout_key": "Title and Content",
+      "fields": {
+        "title": "Вступ",
+        "body": [
+          "Контекст",
+          "Завдання",
+          "Очікування"
+        ]
+      }
+    },
+    {
+      "layout_key": "Text + Image Slide",
+      "fields": {
+        "title": "Ключові ідеї",
+        "body": [
+          "Проблема",
+          "Рішення",
+          "Вплив"
+        ],
+        "image": {
+          "src": "example.png",
+          "alt": "Ілюстрація"
+        }
+      }
+    },
+    {
+      "layout_key": "Comparison Slide",
+      "fields": {
+        "title": "Порівняння",
+        "a_title": "A",
+        "a": [
+          "Плюси",
+          "Мінуси"
+        ],
+        "b_title": "B",
+        "b": [
+          "Плюси",
+          "Мінуси"
+        ]
+      }
+    },
+    {
+      "layout_key": "Quote / Key Message Slide",
+      "fields": {
+        "title": "Головна думка",
+        "quote": "Коротко, чітко, по суті."
+      }
+    },
+    {
+      "layout_key": "Summary / Thank You Slide",
+      "fields": {
+        "title": "Підсумок",
+        "points": [
+          "Результати",
+          "Кроки далі"
+        ],
+        "thanks": "Дякую за увагу!"
+      }
+    }
+  ]
+}

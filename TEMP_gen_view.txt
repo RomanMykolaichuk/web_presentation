@@ -1,0 +1,113 @@
+﻿from __future__ import annotations
+
+import json
+import re
+from typing import Any, Dict, List, Optional
+
+
+SYSTEM_SPEC = (
+    "You generate slide decks as strict JSON only. "
+    "Respond with a single JSON object with key 'slides' containing an array of slides. "
+    "Each slide has 'layout_key' and 'fields'. "
+    "Use provided layout keys exactly; be concise (3-6 bullets). No markdown fences."
+)
+
+
+COMPAT_LAYOUTS = [
+    "Title Slide",
+    "Title and Content",
+    "Image Only",
+    "Video Slide",
+    "Markmap Export",
+    "Agenda / Outline Slide",
+    "Text + Image Slide",
+    "Comparison Slide",
+    "Chart / Graph Slide",
+    "Process / Flow Slide",
+    "Problem-Solution Slide",
+    "Quote / Key Message Slide",
+    "Team / Organizational Slide",
+    "Summary / Thank You Slide",
+]
+
+
+def _strip_code_fences(text: str) -> str:
+    # Remove possible ```json ... ``` fences
+    text = text.strip()
+    text = re.sub(r"^```[a-zA-Z]*\n", "", text)
+    text = re.sub(r"\n```$", "", text)
+    return text.strip()
+
+
+def stub_generate(prompt: str, max_slides: int = 8, lang: str = "uk") -> Dict[str, Any]:
+    title = "РђРІС‚РѕРјР°С‚РёС‡РЅРѕ Р·РіРµРЅРµСЂРѕРІР°РЅР° РїСЂРµР·РµРЅС‚Р°С†С–СЏ" if lang.startswith("uk") else "AutoвЂ‘generated Presentation"
+    slides: List[Dict[str, Any]] = [
+        {
+            "layout_key": "Title Slide",
+            "fields": {"title": title, "subtitle": prompt[:120] + ("вЂ¦" if len(prompt) > 120 else "")},
+        },
+        {
+            "layout_key": "Title and Content",
+            "fields": {
+                "title": "РљР»СЋС‡РѕРІС– С‚РµР·Рё",
+                "body": ["РњРµС‚Р° С‚Р° РѕС‡С–РєСѓРІР°РЅРЅСЏ", "РљРѕСЂРѕС‚РєРёР№ РїР»Р°РЅ", "РљР»СЋС‡РѕРІР° С†С–РЅРЅС–СЃС‚СЊ"],
+            },
+        },
+        {
+            "layout_key": "Text + Image Slide",
+            "fields": {
+                "title": "Р’С–Р·СѓР°Р»С–Р·Р°С†С–СЏ С–РґРµР№",
+                "body": ["РџСЂРѕР±Р»РµРјР°", "Р С–С€РµРЅРЅСЏ", "Р РµР·СѓР»СЊС‚Р°С‚"],
+                "image": {"src": "example.png", "alt": "Р†Р»СЋСЃС‚СЂР°С†С–СЏ"},
+            },
+        },
+        {
+            "layout_key": "Quote / Key Message Slide",
+            "fields": {"title": "Р“РѕР»РѕРІРЅР° РґСѓРјРєР°", "quote": "РљРѕСЂРѕС‚РєРѕ, С‡С–С‚РєРѕ, РїРѕ СЃСѓС‚С–."},
+        },
+        {
+            "layout_key": "Summary / Thank You Slide",
+            "fields": {
+                "title": "РџС–РґСЃСѓРјРѕРє",
+                "points": ["Р©Рѕ Р·СЂРѕР±РёР»Рё", "Р©Рѕ РґР°Р»С–"],
+                "thanks": "Р”СЏРєСѓСЋ Р·Р° СѓРІР°РіСѓ!",
+            },
+        },
+    ]
+    return {"slides": slides[:max(1, min(max_slides, len(slides)))]}
+
+
+def generate_with_gemini(api_key: str, model_name: str, prompt: str, *, max_slides: int = 8, lang: str = "uk") -> Dict[str, Any]:
+    import google.generativeai as genai
+
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(model_name)
+    user_prompt = (
+        f"Language: {lang}. You must output valid UTF-8 JSON only. "
+        f"Target deck length: up to {max_slides} slides. "
+        f"Use these layout keys only: {', '.join(COMPAT_LAYOUTS)}. "
+        f"Topic/brief: {prompt}"
+    )
+    res = model.generate_content([SYSTEM_SPEC, user_prompt])
+    text = getattr(res, "text", None)
+    if not text and getattr(res, "candidates", None):
+        # Fallback to the first candidate's content if needed
+        for c in res.candidates:
+            content = getattr(c, "content", None)
+            if content and getattr(content, "parts", None):
+                text = "".join(getattr(p, "text", "") for p in content.parts)
+                if text:
+                    break
+    if not text:
+        raise RuntimeError("Empty response from model")
+    cleaned = _strip_code_fences(text)
+    data = json.loads(cleaned)
+    # Basic shape normalization
+    if isinstance(data, list):
+        data = {"slides": data}
+    if "slides" not in data or not isinstance(data["slides"], list):
+        raise ValueError("Model output missing 'slides' array")
+    return data
+
+
+
