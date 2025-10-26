@@ -1806,12 +1806,12 @@ function renderMindmap(rootEl, tree) {
       if (!btn) return;
       btn.addEventListener('click', function(e){
         try { e.stopImmediatePropagation(); e.preventDefault(); } catch(_){}
-        const current = (window.state && window.state.settings && window.state.settings.assetsBaseHref) || 'assets';
+        const current = (typeof state !== 'undefined' && state.settings && state.settings.assetsBaseHref) || 'assets';
         const msg = "\u0412\u043A\u0430\u0436\u0456\u0442\u044C URL/\u0448\u043B\u044F\u0445 \u0434\u043E \u043F\u0430\u043F\u043A\u0438 assets (\u043C\u043E\u0436\u043D\u0430 \u0432\u0456\u0434\u043D\u043E\u0441\u043D\u0438\u0439 \u0430\u0431\u043E \u0430\u0431\u0441\u043E\u043B\u044E\u0442\u043D\u0438\u0439)";
         const val = prompt(msg, current);
         if (typeof val === 'string' && val.trim()) {
           const v = val.trim();
-          try { window.state.settings.assetsBaseHref = v; localStorage.setItem('assetsBaseHref', v); } catch(_){}
+          try { state.settings.assetsBaseHref = v; localStorage.setItem('assetsBaseHref', v); } catch(_){}
           try { if (typeof renderSlides === 'function') renderSlides(); } catch(_){}
         }
       }, true);
