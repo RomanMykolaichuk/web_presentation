@@ -3,3 +3,6 @@ https://chatgpt.com/g/g-68fd827be6108191b196859e1ec7c38c-ai-presentation-json-ge
 
 Генеруємо рисунки
 https://chatgpt.com/g/g-68fd946aca2481919da73d513b035216-image-assets-pack-gpt-strict-filename-mode
+
+Генеруємо розумові карти
+https://chatgpt.com/g/g-68fdbf3358048191b82f5d91494310aa-mark-map-mindmap-for-presentation-json

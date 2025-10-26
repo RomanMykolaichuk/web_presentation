@@ -185,6 +185,15 @@
     }
   },
   {
+    "layout_key": "Markmap Export",
+    "fields": {
+      "title": "11а. Впровадження ШІ в освіті",
+      "src": "mindmap_ai_education.html",
+      "center": true,
+      "notes": "Структура основних напрямів і взаємозв’язків у впровадженні ШІ в освіті."
+    }
+  },
+  {
     "layout_key": "Team / Organizational Slide",
     "fields": {
       "title": "12. Освітньо-аналітична команда",
