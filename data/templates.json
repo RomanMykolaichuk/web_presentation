@@ -164,4 +164,15 @@
       "thanks": "string?"
     }
   }
-]
+,
+  {
+    "id": "tpl-three-cols",
+    "name": "3 Columns (Image+Text)",
+    "description": "Слайд з назвою та 3 колонками: невелике зображення вгорі або внизу, під ним текст.",
+    "layout_key": "Three Columns Image+Text Slide",
+    "fieldsSchema": {
+      "title": "string",
+      "columns": "[{img?, text|string[], imagePos? (top|bottom)}]",
+      "footer": "string?"
+    }
+  }]

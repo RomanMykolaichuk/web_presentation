@@ -234,6 +234,13 @@ input[type="checkbox"] {
   box-shadow: 0 4px 18px rgba(0,0,0,.35);
 }
 .chart.placeholder, figure.chart { display: grid; place-items: center; height: 100%; }
+/* Three Columns Image+Text */
+.content.three-cols { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; align-items: start; }
+.content.three-cols .tc-col { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.content.three-cols .tc-col.top .tc-img { margin-bottom: 8px; }
+.content.three-cols .tc-col.bottom .tc-img { margin-top: 8px; }
+.content.three-cols .tc-img img { display:block; width: 100%; height: auto; max-height: 120px; object-fit: contain; border-radius: 6px; }
+@media (max-width: 900px){ .content.three-cols { grid-template-columns: 1fr; } }
 /* Summary / Thank You: constrain QR size */
 .content.summary .qr { display: flex; justify-content: flex-start; }
 .content.summary .qr img {
