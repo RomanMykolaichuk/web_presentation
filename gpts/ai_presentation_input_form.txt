@@ -1,0 +1,43 @@
+
+=== AI Presentation JSON Generator — INPUT FORM ===
+
+Paste this form in your first message to the GPT along with your templates.json (or attach the file).
+
+TEMPLATES_JSON:
+(paste the full JSON of your templates here or attach templates.json)
+
+EXAMPLE_JSON (optional, 1–2 slides for style):
+[
+  {
+    "layout_key": "Title Slide",
+    "fields": {
+      "title": "Приклад теми",
+      "subtitle": "Короткий підзаголовок",
+      "footer": "Організація/Кафедра"
+    }
+  }
+]
+
+TASK:
+{
+  "topic": "AI-Powered Presentation Design: Practical Demonstrations for Education and Administrative Leadership",
+  "audience": "Викладачі та адміністративні керівники",
+  "goal": "Показати практичну трансформацію цифрової компетентності через AI-підхід",
+  "duration_slides": 12,
+  "language": "uk",
+  "tone": "професійно-академічний",
+  "outline_hints": ["Вступ", "AI як співавтор", "Архітектура JSON-шаблонів", "Live-demo", "Висновки"],
+  "needs_video": true,
+  "video_url": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+  "image_placeholders_prefix": "image_ai_topic_",
+  "chart_placeholders_prefix": "chart_ai_topic_",
+  "constraints": [
+    "Використовувати лише layout_key та поля із TEMPLATES_JSON",
+    "Без Markdown/HTML у полях",
+    "Короткі, інформативні пункти (3–6 на слайд)",
+    "Починати з Title Slide, завершувати Summary / Thank You Slide"
+  ]
+}
+
+EXPECTED_OUTPUT:
+Return ONLY a valid JSON array of slides.
