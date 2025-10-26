@@ -234,6 +234,15 @@ input[type="checkbox"] {
   box-shadow: 0 4px 18px rgba(0,0,0,.35);
 }
 .chart.placeholder, figure.chart { display: grid; place-items: center; height: 100%; }
+/* Summary / Thank You: constrain QR size */
+.content.summary .qr { display: flex; justify-content: flex-start; }
+.content.summary .qr img {
+  display: block;
+  max-width: clamp(180px, 30vmin, 330px);
+  max-height: clamp(180px, 30vmin, 330px);
+  width: auto;
+  height: auto;
+}
 
 /* Optional right side decorative strip */
 .media {
