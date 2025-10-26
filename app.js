@@ -11,6 +11,7 @@ const state = {
     notesVisible: false,
     timerVisible: false,
     slideNumbersVisible: false,
+    assetsBaseHref: "assets",
   },
   logoUrl: null,
 
@@ -201,6 +202,21 @@ function downloadJSON(filename, data) {
   a.download = filename;
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 500);
+}
+
+// Override asset URL resolution to support a user-configurable base path.
+function getAssetUrl(src) {
+  if (!src) return src;
+  const entry = getAssetEntry(src);
+  if (entry && entry.url) return entry.url;
+  const s = String(src);
+  // Keep absolute/protocol URLs and rooted paths as-is
+  if (/^((data|blob|https?|file):)/i.test(s) || s.startsWith("/")) return s;
+  // Build from configured assets base (default 'assets')
+  const base = (state.settings.assetsBaseHref || "assets").replace(/\/+$/, "");
+  const normalized = s.replace(/^\.\/+/, "");
+  if (normalized.startsWith(base + "/")) return normalized;
+  return `${base}/${normalized}`;
 }
 
 // Discover optional logo at logo/logo.png and cache URL
@@ -1093,9 +1109,20 @@ function setupUI() {
     if (f) handleSlidesFile(f);
   });
 
-  $("#btn-open-assets").addEventListener("click", () =>
-    $("#input-assets").click()
-  );
+  $("#btn-open-assets").addEventListener("click", () => {
+    const current = state.settings.assetsBaseHref || "assets";
+    const val = prompt(
+      "Вкажіть URL/шлях до папки assets (відносний або абсолютний)",
+      current
+    );
+    if (typeof val === "string" && val.trim()) {
+      state.settings.assetsBaseHref = val.trim();
+      try {
+        localStorage.setItem("assetsBaseHref", state.settings.assetsBaseHref);
+      } catch (_) {}
+      renderSlides();
+    }
+  });
   $("#input-assets").addEventListener("change", (e) =>
     addAssetsFromFileList(e.target.files || [])
   );
@@ -1137,6 +1164,8 @@ function setupUI() {
   }
   state.settings.notesVisible = localStorage.getItem("notesVisible") === "1";
   state.settings.trustedHTML = localStorage.getItem("trustedHTML") === "1";
+  state.settings.assetsBaseHref =
+    localStorage.getItem("assetsBaseHref") || state.settings.assetsBaseHref || "assets";
   state.settings.slideNumbersVisible =
     localStorage.getItem("slideNumbersVisible") === "1";
   toggleNotes.checked = state.settings.notesVisible;

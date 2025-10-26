@@ -219,6 +219,20 @@ input[type="checkbox"] {
 .team-grid .member .name { margin-top: 8px; font-weight: 600; font-size: calc(1em + 2px); }
 .team-grid .member .role { color: var(--muted); font-size: calc(1em + 2px); }
 .quote { max-width: 80%; margin: 0 auto; font-size: clamp(18px, 2.4vw, 28px); }
+.slide .content.quote { position: relative; }
+.slide .content.quote blockquote { margin: 0; padding-right: clamp(140px, 30vw, 380px); padding-bottom: 80px; }
+.slide .content.quote .q-photo { position: absolute; right: 0; bottom: 60px; z-index: 3; }
+.slide .content.quote .q-photo img {
+  display: block;
+  max-width: clamp(120px, 28vw, 360px);
+  max-height: clamp(120px, 40vh, 320px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 18px rgba(0,0,0,.35);
+}
 .chart.placeholder, figure.chart { display: grid; place-items: center; height: 100%; }
 
 /* Optional right side decorative strip */
