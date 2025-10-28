@@ -175,4 +175,17 @@
       "columns": "[{img?, text|string[], imagePos? (top|bottom)}]",
       "footer": "string?"
     }
-  }]
+  },
+  {
+    "id": "tpl-calc",
+    "name": "Давайте порахуємо",
+    "description": "Слайд із двома колонками: ліворуч формулюється завдання (списком або абзацом), праворуч інтерактивний веб‑калькулятор для обчислень прямо на слайді.",
+    "layout_key": "Давайте порахуємо",
+    "fieldsSchema": {
+      "title": "string?",
+      "task": "string|string[]",
+      "footer": "string?",
+      "notes": "string?"
+    }
+  }
+]

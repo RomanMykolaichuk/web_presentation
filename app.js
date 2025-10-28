@@ -1341,7 +1341,7 @@ function initPannable() {
 async function enhanceAndCenterActiveIframes() {
   const active = document.querySelector(".slide.active");
   if (!active) return;
-  const iframes = active.querySelectorAll('iframe[data-center="1"]');
+  const iframes = active.querySelectorAll('iframe[data-center="1"]:not([data-mmexport])');
   iframes.forEach(async (ifr) => {
     // Р В РЎвЂєР В РўвЂР В РЎвЂР В Р вЂ¦ Р РЋР вЂљР В Р’В°Р В Р’В· Р В Р вЂ¦Р В Р’В° iframe: Р РЋР С“Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР В Р’В±Р В Р’В° Р В Р’В·Р В Р’В°Р В Р вЂ Р В Р’В°Р В Р вЂ¦Р РЋРІР‚С™Р В Р’В°Р В Р’В¶Р В РЎвЂР РЋРІР‚С™Р В РЎвЂ HTML Р РЋРІР‚С™Р В Р’В° Р В Р вЂ Р РЋР С“Р РЋРІР‚С™Р В Р’В°Р В Р вЂ Р В РЎвЂР РЋРІР‚С™Р В РЎвЂ Р РЋРІР‚РЋР В Р’ВµР РЋР вЂљР В Р’ВµР В Р’В· srcdoc Р РЋРІР‚вЂњР В Р’В· Р РЋРІР‚В Р В Р’ВµР В Р вЂ¦Р РЋРІР‚С™Р РЋР вЂљР РЋРЎвЂњР В Р вЂ Р В Р’В°Р В Р вЂ¦Р В Р вЂ¦Р РЋР РЏР В РЎВ Р РЋРІР‚вЂњ Р В РЎвЂ”Р РЋР вЂљР В РЎвЂўР В РЎвЂќР В РЎвЂР В РўвЂР В РЎвЂќР В РЎвЂўР РЋР вЂ№ Р В РЎвЂќР В Р’В»Р В Р’В°Р В Р вЂ Р РЋРІР‚вЂњР РЋРІвЂљВ¬
     if (!ifr._enhanced) {
