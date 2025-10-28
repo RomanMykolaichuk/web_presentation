@@ -1,0 +1,165 @@
+[
+  {
+    "layout_key": "Title Slide",
+    "fields": {
+      "title": "Порівняння Web Presenter та PowerPoint",
+      "subtitle": "Сучасні підходи до створення освітніх презентацій",
+      "footer": "Для викладачів вишів",
+      "notes": "Тема: цифровізація навчального процесу"
+    }
+  },
+  {
+    "layout_key": "Agenda / Outline Slide",
+    "fields": {
+      "title": "План",
+      "items": [
+        "Вступ",
+        "Можливості Web Presenter",
+        "Можливості PowerPoint",
+        "Порівняння",
+        "Практичні кейси",
+        "Висновки"
+      ]
+    }
+  },
+  {
+    "layout_key": "Title and Content",
+    "fields": {
+      "title": "Вступ",
+      "body": [
+        "Презентації є ключовим елементом навчального процесу.",
+        "PowerPoint — класичний інструмент для офлайн і онлайн занять.",
+        "Web Presenter — інноваційна альтернатива для інтерактивних веб-презентацій.",
+        "Мета — порівняти обидва підходи та визначити переваги для викладачів."
+      ]
+    }
+  },
+  {
+    "layout_key": "Text + Image Slide",
+    "fields": {
+      "title": "Можливості Web Presenter",
+      "body": [
+        "Презентації у браузері без встановлення програм.",
+        "Підтримка JSON-шаблонів і модульності.",
+        "Автоматична адаптація під мобільні пристрої.",
+        "Інтеграція з відео, графіками та анімаціями."
+      ],
+      "image": {
+        "src": "image_ai_01.png",
+        "alt": "Інтерфейс Web Presenter",
+        "pos": "right"
+      }
+    }
+  },
+  {
+    "layout_key": "Text + Image Slide",
+    "fields": {
+      "title": "Можливості PowerPoint",
+      "body": [
+        "Зручний офлайн-редактор із широким функціоналом.",
+        "Велика кількість шаблонів і стилів.",
+        "Підтримка мультимедіа та переходів.",
+        "Сумісність з Office 365 і OneDrive."
+      ],
+      "image": {
+        "src": "image_ai_02.png",
+        "alt": "Інтерфейс PowerPoint",
+        "pos": "left"
+      }
+    }
+  },
+  {
+    "layout_key": "Comparison Slide",
+    "fields": {
+      "title": "Порівняння платформ",
+      "a_title": "Web Presenter",
+      "a": [
+        "Працює у браузері",
+        "Підтримує інтерактивність",
+        "Легке оновлення контенту",
+        "Спільна робота онлайн"
+      ],
+      "b_title": "PowerPoint",
+      "b": [
+        "Потрібне встановлення",
+        "Велика кількість функцій",
+        "Складніше публікування",
+        "Орієнтація на локальне середовище"
+      ]
+    }
+  },
+  {
+    "layout_key": "Video Slide",
+    "fields": {
+      "title": "Демонстрація Web Presenter у дії",
+      "videos": [
+        {
+          "src": "https://www.youtube.com/watch?v=yuFzPTyiZ-k",
+          "controls": true,
+          "autoplay": true,
+          "muted": false
+        }
+      ],
+      "footer": "Демонстраційний приклад"
+    }
+  },
+  {
+    "layout_key": "Problem–Solution Slide",
+    "fields": {
+      "title": "Проблема → Рішення",
+      "problem": [
+        "Складність оновлення локальних файлів",
+        "Обмежена взаємодія студентів під час показу"
+      ],
+      "solution": [
+        "Використання веб-презентацій у реальному часі",
+        "Підтримка інтерактивних елементів і аналітики"
+      ]
+    }
+  },
+  {
+    "layout_key": "Markmap Export",
+    "fields": {
+      "title": "Структура порівняння (Markmap)",
+      "src": "markmap_web_vs_ppt.html",
+      "center": true
+    }
+  },
+  {
+    "layout_key": "Quote / Key Message Slide",
+    "fields": {
+      "quote": "Інтерактивність і гнучкість — ключ до ефективного навчання у цифрову добу.",
+      "author": "Освітній технолог XXI століття"
+    }
+  },
+  {
+    "layout_key": "Process / Flow Slide",
+    "fields": {
+      "title": "Як перейти до Web Presenter",
+      "steps": [
+        "Ознайомлення",
+        "Підготовка контенту",
+        "Конвертація у JSON",
+        "Публікація",
+        "Зворотний зв’язок"
+      ]
+    }
+  },
+  {
+    "layout_key": "Summary / Thank You Slide",
+    "fields": {
+      "title": "Висновки",
+      "points": [
+        "Web Presenter — сучасна альтернатива PowerPoint.",
+        "Зручний для інтерактивного онлайн-навчання.",
+        "Підтримує відкриті формати даних.",
+        "Рекомендовано для освітніх закладів."
+      ],
+      "contacts": "info@eduinnovations.ua",
+      "qr": {
+        "src": "qr_web_presenter.png"
+      },
+      "thanks": "Дякуємо за увагу!"
+    }
+  }
+]
